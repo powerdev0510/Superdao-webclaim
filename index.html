@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+  <html class="no-js IE lt-ie9 lt-ie8 lt-ie7"></html>
+<![endif]-->
+<!--[if IE 7]>
+  <html class="no-js IE lt-ie9 lt-ie8"></html>
+<![endif]-->
+<!--[if IE 8]>
+  <html class="no-js IE lt-ie9"></html>
+<![endif]-->
+<!--[if gt IE 8]>
+  <html class="no-js IE gt-ie8"></html>
+<![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js" lang="zxx">
+<!--<![endif]-->
+
+<head>
+	<!-- title -->
+	<title>SuperDao Claim Tool</title>
+	<!-- meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width,initial-scale=1,maximum-scale=1" name="viewport">
+	<meta content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" name="generator">
+	<meta content="SuperDao.io" name="author">
+	<meta content="SuperDAO is an Ethereum decentralized autonomous governance system for incentivized collaborative management of disruptive, economical viable dapp ventures.
+    Superdao enables collaboration of innovators and communities into strong thriving forces." name="Description">
+	<!-- fav icon -->
+	<link href="" rel="shortcut icon">
+	<!-- css => Ionic icons sheet -->
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!--css=>Toastr-->
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+	<!-- css => Vendor sheet -->
+	<link href="css/vendor.min.css" media="screen" rel="stylesheet" type="text/css">
+	<!-- css => style sheet -->
+	<link href="css/style.css" media="screen" rel="stylesheet" type="text/css">
+	<!-- css => Chartist sheet -->
+	<link href="css/chartist.min.css" media="screen" rel="stylesheet" type="text/css">
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+		<script>
+	      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	      ga('create', 'UA-104237560-3', 'auto');
+	      ga('send', 'pageview');
+	  </script>
+</head>
+
+<body id="top" class="homePage">
+
+	<div class="allWrapper">
+
+		<section class="SuperDAO clearfix" id="SuperDAO">
+			<div class="sectoinBg bgImg_1">
+				<div class="bgoverly"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="sectionTitle brLineIcon text-center">
+								<h2>
+									<span>SuperDAO</span> : Efficient Multi Dapp, DAO Management Platform</h2>
+								<p>The SuperDAO Pre - ICO has been modified to a “Pre - ICO” Only project.
+									<br> That means that holders will be able to mine the rest of SuperDAO tokens (SUP) based on early stake
+									<br> and also have other rewards and benefits from
+									<a href="http://pokereum.io" class="unset"><samp>Pokereum</samp></a> (our first dapp) and our media dapp in stealth mode development.
+									<br> Get an Immediate Position with 40% discounted and access to our first DAPP is decentralized Poker Pokereum
+								</p>
+								<a href="https://blog.superdao.io/sup-supercharged-with-pokereum-demo-other-dapp-rewards-new-pre-sale-only-funding-round-74a8cc3bbe3c">Learn more about it here</a>
+							</div>
+							<!-- end of sectionTitle -->
+						</div>
+						<!-- end of col12 -->
+					</div>
+					<!-- end of row -->
+
+					<div class="row">
+						<div class="pieChartsTokens clearfix" id="pieChartsTokens">
+							<div class="col-sm-4">
+								<div class="pieCharts">
+									<!-- <span class="chart">
+										<canvas id="chart" width="230" height="230"/>
+									</span> -->
+									<span class="chart" data-percent="25"></span>
+									<div class="chartLegend">
+										<div class="tokenCount">
+											<span class="tokenLegend">
+												<span class="tokenLegendBox tokenLeft"></span> Token Left</span>
+											<span class="tokenLegend">
+												<span class="tokenLegendBox tokenBought"></span> Token Bought</span>
+										</div><!-- end of tokenCount -->
+									</div><!-- end of chartLegend -->
+
+									<div class="goalProgress clearfix">
+										<span id="fund-goal-label">0%</span>
+										<div class="progress">
+										  <div id="fund-goal" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-step=0.01></div>
+										</div>
+										<small>FUNDING GOAL PROGRESS</small>
+									</div><!-- end of goalProgress -->
+								</div><!-- end of pieCharts -->
+
+								<form onsubmit="return false;" class="claimForm clearfix">
+
+                  <div class="formControl dropdown-toggle" id="eth_accounts_container">
+                    <!--<input type="number" id="number" value="" onblur="if(this.value=='')this.value=''" onfocus="if(this.value=='')this.value=''">-->
+										<input type="text" id="eth_accounts" class="" onchange="getAddressBalance()" onkeyup="getAddressBalance()" onblur="getAddressBalance()" onmouseup="getAddressBalance()" oninput="getAddressBalance()" required=""/>
+                  </div><!-- end of formControl -->
+
+                  <div class="formControl">
+                    <input type="text" id="claim_value" value="ETH AMOUNT" onblur="if(this.value=='')this.value='ETH AMOUNT'" onfocus="if(this.value=='ETH AMOUNT')this.value=''"  required="">
+                  </div><!-- end of formControl -->
+
+                  <div class="formControl">
+                    <input type="text" id="gas_price" value="4 GWEI" onblur="if(this.value=='')this.value='GAS PRICE [GWEI]'" onfocus="if(this.value=='GAS PRICE [GWEI]')this.value=''"  required="">
+                  </div><!-- end of formControl -->
+
+									<button class="btn submitBtn" id="claim_button" disabled="true" onclick="claim()">CLAIM TOKENS</button>
+								</form><!-- end of claimForm -->
+								<div class="text-center clearfix ">
+									<p>
+										<h4 class="tokenBal">
+											 OWNED:
+											<span id="tokn_bal">...</span>
+										</h4>
+									</p>
+								</div>
+							</div><!-- end of col4 -->
+
+							<div class="col-sm-8">
+								<div class="tokens_info">
+									<div class="tokenBox tokenSpecs clearfix">
+										<h3>Tokens specs</h3>
+										<ul class="list">
+											<li>- Contract Address :
+												<span > 0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c </span>
+											</li>
+											<li>- total tokens :
+												<span id='prom_tkns'>0</span>
+											</li>
+											<li>- Total Available this round :
+												<span id='ths_rnd'>0</span>
+											</li>
+											<li>- Tokens left :
+												<span id='tkns_lft'>0</span>
+											</li>
+											<li>- Tokens bought :
+												<span  id='tkns_bgh'>0</span>
+											</li>
+											<li>- Discount :
+												<span >40%</span>
+											</li>
+											<li>- Price at discount :
+												<span  id='tkns_dsc_prc'>0 ETH</span>
+											</li>
+										</ul>
+									</div>
+									<!-- end of tokenSpecs -->
+
+									<div class="tokenBox tutorialInfo clearfix">
+										<h3>Tutorial & info</h3>
+										<ul class="list">
+											<li>- Download metamask</li>
+											<li>- Create an account</li>
+											<li>- Fund an address in your metamask wallet, select account.</li>
+											<li>- View number of SuperDAO superneums owned by addresss, below the “claim tokens” button</li>
+											<li>- You can also view number of superneums owned by pasting your address in the address field.</li>
+											<li>- Invest in SuperDAO superneums buy filling out form and clicking “claim tokens”</li>
+											<li>- For more information on the tokens
+												<a href="https://blog.superdao.io/sup-supercharged-with-pokereum-demo-other-dapp-rewards-new-pre-sale-only-funding-round-74a8cc3bbe3c">click here</a> to view other tutorials
+												<a href="https://blog.superdao.io/">click here</a>
+											</li>
+										</ul>
+									</div>
+									<!-- end of tutorialInfo -->
+
+									<div class="ASSEEN clearfix">
+										<ul class="logoList">
+											<li>
+												<span>AS SEEN IN :</span>
+											</li>
+											<li>
+												<a href="http://bitcoinist.com/tag/superdao/">
+													<img src="images/logo/01.png" alt="logo">
+												</a>
+											</li>
+											<li>
+												<a href="https://cointelegraph.com/tags/superdao">
+													<img src="images/logo/02.png" alt="logo">
+												</a>
+											</li>
+											<li>
+												<a href="https://themerkle.com/?s=superdao">
+													<img src="images/logo/03.png" alt="logo">
+												</a>
+											</li>
+										</ul>
+									</div><!-- end of ASSEEN -->
+								</div><!-- end of tokens_info -->
+							</div><!-- end of col8 -->
+						</div><!-- end of pieChartsTokens -->
+					</div><!-- end of row -->
+				</div><!-- end of container -->
+			</div><!-- end of sectoinBg-->
+		</section><!-- end of SuperDAO -->
+
+		<section class="pokereum clearfix" id="pokereum">
+			<div class="sectionBg cinderBg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="featureBox brLineIcon">
+								<h2>Pokereum Dapp
+									<br> and Media torrent DAPP</h2>
+								<p>SuperDAO tokens play a crucial role in our dapps especially Pokereum our decentralized poker project. Pokereum poker
+									is the first decentralized poker project, that uses an EVM based smart contract, decentralized blockchain and real
+									time communication (RTC) peer to peer framework to solve the mental poker problem. The solution to the mental poker
+									problem leveraging smart contracts and RTC had been documented in a published draft paper prior (2014) to the completion
+									of the platform (Ethereum blockchain) on which it is built . The user experience demo was released
+									<a href="http://demo.pokereum.io">here</a>
+									<br>
+									<br>and the team will be releasing an integrated mental poker solution to the Ethereum testnet in a few weeks after
+									the user experience feedback. Also in stealth development is a special media dapp that will leverage torrents enabling
+									users to earn passive income based on participation and staking of SUP.</p>
+							</div>
+							<!-- end of featureBox -->
+						</div>
+						<!-- end of col6 -->
+
+						<div class="featureMedia">
+							<img src="images/feature_img_01.png" alt="Image">
+						</div>
+						<!-- end of featureMedia -->
+					</div>
+					<!-- end of row -->
+				</div>
+				<!-- end of container -->
+			</div>
+			<!-- end o sectionBg -->
+		</section>
+		<!-- end of pokereum -->
+
+		<section class="supTokens clearfix" id="supTokens">
+			<div class="sectionBg mirageBg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="featureMedia">
+								<img src="images/feature_img_02.png" alt="Image">
+							</div>
+							<!-- end of featureMedia -->
+						</div>
+						<!-- end of col6 -->
+
+						<div class="col-sm-6">
+							<div class="featureBox brLineIcon">
+								<h2>Superdao [SUP tokens]</h2>
+								<p>SuperDAO is an ethereum, reputation based, decentralized autonomous organization governance system for management
+									of viable dapp ventures. In simple terms, a crowd managed organization developing profitable disruptive dapps. Some
+									of our dapps in development are Pokereum decentralized poker and other entralized media sed dapp. SuperDAO Tokens
+									“Superneum” ( Sup ), are the means to aboratively vote on ogistical tions for organizational direction. SUP tokens
+									are used for staking to earn more of the izational tokens and as staking mechanism to earn network rewards within
+									our dapps Pokereum and other dapps in ealth development. At the initial and current state of SuperDAO, SUP are called
+									promissory tokens.</p>
+							</div>
+							<!-- end of featureBox -->
+						</div>
+						<!-- end of col6 -->
+
+					</div>
+					<!-- end of row -->
+				</div>
+				<!-- end of container -->
+			</div>
+			<!-- end o sectionBg -->
+		</section>
+		<!-- end of pokereum -->
+
+		<section class="ourTeam clearfix gradientBg" id="ourTeam">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="sectionTitle text-center">
+							<h2>Our
+								<strong>Team</strong>
+							</h2>
+						</div>
+						<!-- end of sectionTitle -->
+					</div>
+					<!-- end of col12 -->
+				</div>
+				<!-- end of row -->
+
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="singleMember text-center twline">
+							<a target="_blank" href="https://www.linkedin.com/in/ajayioladapo/">
+								<div class="avater">
+									<img src="images/member/01.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Oladapo Ajayi</h4>
+							<p>Founder / Solidity Expert / Strategy development and Operations</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/pmazzotta/">
+								<div class="avater">
+									<img src="images/member/02.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Patrick Mazotta</h4>
+							<p>Risk analysis mathematical models</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/jermaineencarnacion/">
+								<div class="avater">
+									<img src="images/member/03.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Jermaine Encarnacion</h4>
+							<p>Marketing specialist</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/04.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Panos Papantoniou</h4>
+							<p>Security specialist | DevOPS | Solidity</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://twitter.com/achiko75" >
+								<div class="avater">
+									<img src="images/member/05.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M74.280,7.827 C71.582,8.990 68.651,9.827 65.627,10.153 C68.744,8.292 71.116,5.361 72.233,1.872 C69.349,3.593 66.092,4.849 62.696,5.501 C59.951,2.570 56.043,0.756 51.717,0.756 C43.390,0.756 36.690,7.501 36.690,15.782 C36.690,16.945 36.830,18.108 37.063,19.224 C24.595,18.573 13.476,12.619 6.079,3.500 C4.777,5.733 4.032,8.292 4.032,11.083 C4.032,16.294 6.684,20.899 10.732,23.598 C8.266,23.505 5.940,22.807 3.939,21.690 C3.939,21.737 3.939,21.830 3.939,21.876 C3.939,29.180 9.103,35.228 15.988,36.624 C14.732,36.949 13.383,37.135 12.034,37.135 C11.057,37.135 10.127,37.042 9.196,36.903 C11.104,42.858 16.640,47.184 23.246,47.323 C18.082,51.371 11.615,53.743 4.591,53.743 C3.335,53.743 2.172,53.697 0.962,53.557 C7.615,57.837 15.523,60.303 24.037,60.303 C51.670,60.303 66.790,37.414 66.790,17.550 C66.790,16.899 66.790,16.247 66.743,15.596 C69.674,13.456 72.233,10.804 74.280,7.827 Z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Archil Phanchulidze</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/anthony-adegbemi-363bb532/">
+								<div class="avater">
+									<img src="images/member/06.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Anthony Adegbemi</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/babayemi-olulana-33956853/">
+								<div class="avater">
+									<img src="images/member/07.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Babayemi Olulana</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/slabodzich-mikhail-14674825/">
+								<div class="avater">
+									<img src="images/member/08.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Mikhail Slabodzich</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/09.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Esco Obong</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/10.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Aaron Vasquez</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/11.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Cristian</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/12.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Edmund Mai</h4>
+							<p>Software Engineer | DevOPS</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/13.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+DIlQjgoG7x7z8KSj7RZGQf7qaNhtJk5RuVyEDwcTb3uReks4LbUxHnvJlgJxaO2/xN0aEFS+bQGSfpkH0hnmH6LaJlzFRGesTZ9M6SqBbsgmweMtZT4wwUPURNBTqNR1OGHeK6c+iYyRzQs0uVTijsH8paAAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAcISURBVGjevZv5Q1RFHMBHzl1gV0FgXQTxACEhcCUFwRVEUTMPhGWVIBULFTHPIDzxQFEgLVYRrRRTs0K7TPOAtEPNLiu7s+Zf6b11dd/b953ZeTtD3992vvP9ft6bN8d3vjOLkF4ZFBQcEhoWbjBiSYyG8LDQkOCgQbrd6JKIyCiTGYNiNkVFRgwMdfAQkxFTxWgaEi2aGjM0FjNJbFyMQGxkvIUNK4tlWKQYqjVhODv1oQxPsPJjE5P0YmVJSuREj0gOBCvLyBEc2FGjA8XKMnpMgNiUVCMPVxpeqSmBcMem8WFlSRurG5v+xDh+LsbjgtP1cTPiRWBlGZahh5v5pCguxlmZ7NxsMz/PK+ZsVu54m0guxrbxbNwJOWK5GOc8xcKdKBory0SG9x0ILsZ+33m88Hb2tLaf75wtuF95xUbt25lCx5FazJTxnJE1cFxpJiHOYenDBpIrzZ6keTvYt+ak3LxJgVIm5eVO9i0LhrljNcuvHETkF0yx64XapxTkS6ZTfcuNhRA3RbP+mj3reNE0XeFe3rQij8diX1UaFBlM13iY4VUGMYbVGJcEea1marSztNwx2jhntrLjPT2HBTvnGWUHmqvRG7VxmEnrZZ6qwvzpnkdbULowrqy80FHhdFY4CsvL4haWLvC4jVqkMlms9Wny5Y7Q1rH4fpDMyuJnq6rB0ZhR/dyS4qW+r5MCbEB8ol5ruLbKMo379BpEkRqtdrnW6/PqSD8R6iaIW14A3Caq2gTap9Tyg2sBt0krFBVW4v8PjFcqKoATRCw/uATym+fVr4L0uI4fXAc6XvVYvxrU16/h5a6pBx2/+EgfQ9jvr+UFr4X9Wh5lK+JgPV7HC15HcBzn0ZMWgDReMGm/6em26wlqvIEXvIHkeSO1pTfxchF6idrWDbCykT9zg6yNsO+XZWUEnHBo2szPRWjLVtC5Uc4+boMfarsILkI7YO/bJFUzqBknKDMYA2c0miXVTlCzSwwXoV2g+52SBt617BYF3g26NyO0B1TMEcVFCA4S96AWsHyvOPA+ENCCWsHy/eLAZSCgFYWA5QfEgeEZOQSFQsWWNnFgKziHhKKwAe5bCC2ACGEoHCrmXhCVAi6O4cgAFbeLBHdABAMCsy0dIsFgnGFDYJ8b+KbGMPgVkeCDOsDLRIIP6QDbdObVaVIDB88IDhH2iAPng4Ct8HDCzLlt/1IOAgwIPkh7VRy4AAQkITgOfE0cGF4WGwkbtlxx4E4QsBptB8ubhJ1+u5pAwHZ0GCzHR0SBp8L+D6MuWHFUFPgo7L+LMMxwt6C2juiG/UtJVngg42NiwMdg71J4C+USZUmu4YZKYk2GvcuZxWZYhSeIAJMOk44jUspHSvoU8XOL6gjO5cTPItK5+Ov8YEKXxkZ3lpewMcf4DV5uAslzg1vdSlLbq/m4bxIPM0649dEkNT7Zw8PtOUl07LkSVEImnwqc29JNdPsoIU1sa+ks8niAm5m2t+rJXk94Kp2mXSHqOBMIdx7t1OZxShFRr0A07RusF3vgbD3NY/zjim8rSsNSzzWb1BGg5R09iYn08nebMFXe81b2Rgm97m96+rzPziYrah5TxNuWff4g9iPKbYpipF+Qfy99f7MmYvkgfmi2kwbND5r1IcsZaILCxqqINXfMl4ZgC3KVQkbLaz8CV62UjzsnMzBlSVKlKpUxaPJFqeCT9kvtkFnvRfh1FzPfhFId/6CaPIXK3oVQ4eWWT4HjKnyF1NCtjNyrPi2myjrZr7nLrmvN0ojhQRvjMX+Lr+ESpbZOGuKuhlN9GrN+ct9KZOKWauw2qj7SZ1KYVlziHOlj1n2DDM5guQBm3Kg1rFLVuI7Q5rUo85Da7iZtOJUygD8H7KxfKGu4Yz3Xl2fUF7uqaOAL/rm5YNZ/jGrd/koq6cKVEbcUc1j4bRr4jl+ufQtseUVZqVLuqWelMHRQasfX0u/LlZt66LPmbb9g4licoazliXsONOxdhO4Olo77vrlFP3pz+OPOJJq6lKeqjQ9DgPUGvBiVG7LuSivJDCr4Wz/cPMq1wejvFBU9J3w3KhD6vrM0Av3QtYIKdtK5lx0042plB5uGdAkd7JkNiXJPeZHslq4rrKdp3Jw7/sz7leSr23SAaZ0rp9+/fYHq8lzJ3B+9qkvUkJMCzjnH8uT9Ptf2km7uOF710899tWbsDAzM8r6yHCFuPSoCAtvvsX6tnvsEF45AwPd1bMGifxEHHq7rvxOuPlHgX116uJL81isC3MvUndXyeyw/OHaUfq60KA6184HtfwR6bhYdygMOdbByAPnzr0DBnatYGbCklynj5b9ZwVll/Pm5mgfeXHo+reIlb596ICQtiNA/fQ+7mZ/0ea67kvHfa2xemcR5rNZmMfmZgxwNW23ts++yefwPomnO+rxBr6IAAAAASUVORK5CYII=" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Sheraz Arshad</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/14.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Hatim Khomsi</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/15.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Olufunso Ekundayo</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/16.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ayeni</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/17.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ugo Ifezue</h4>
+							<p>Designer</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/18.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+DIlQjgoG7x7z8KSj7RZGQf7qaNhtJk5RuVyEDwcTb3uReks4LbUxHnvJlgJxaO2/xN0aEFS+bQGSfpkH0hnmH6LaJlzFRGesTZ9M6SqBbsgmweMtZT4wwUPURNBTqNR1OGHeK6c+iYyRzQs0uVTijsH8paAAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAcISURBVGjevZv5Q1RFHMBHzl1gV0FgXQTxACEhcCUFwRVEUTMPhGWVIBULFTHPIDzxQFEgLVYRrRRTs0K7TPOAtEPNLiu7s+Zf6b11dd/b953ZeTtD3992vvP9ft6bN8d3vjOLkF4ZFBQcEhoWbjBiSYyG8LDQkOCgQbrd6JKIyCiTGYNiNkVFRgwMdfAQkxFTxWgaEi2aGjM0FjNJbFyMQGxkvIUNK4tlWKQYqjVhODv1oQxPsPJjE5P0YmVJSuREj0gOBCvLyBEc2FGjA8XKMnpMgNiUVCMPVxpeqSmBcMem8WFlSRurG5v+xDh+LsbjgtP1cTPiRWBlGZahh5v5pCguxlmZ7NxsMz/PK+ZsVu54m0guxrbxbNwJOWK5GOc8xcKdKBory0SG9x0ILsZ+33m88Hb2tLaf75wtuF95xUbt25lCx5FazJTxnJE1cFxpJiHOYenDBpIrzZ6keTvYt+ak3LxJgVIm5eVO9i0LhrljNcuvHETkF0yx64XapxTkS6ZTfcuNhRA3RbP+mj3reNE0XeFe3rQij8diX1UaFBlM13iY4VUGMYbVGJcEea1marSztNwx2jhntrLjPT2HBTvnGWUHmqvRG7VxmEnrZZ6qwvzpnkdbULowrqy80FHhdFY4CsvL4haWLvC4jVqkMlms9Wny5Y7Q1rH4fpDMyuJnq6rB0ZhR/dyS4qW+r5MCbEB8ol5ruLbKMo379BpEkRqtdrnW6/PqSD8R6iaIW14A3Caq2gTap9Tyg2sBt0krFBVW4v8PjFcqKoATRCw/uATym+fVr4L0uI4fXAc6XvVYvxrU16/h5a6pBx2/+EgfQ9jvr+UFr4X9Wh5lK+JgPV7HC15HcBzn0ZMWgDReMGm/6em26wlqvIEXvIHkeSO1pTfxchF6idrWDbCykT9zg6yNsO+XZWUEnHBo2szPRWjLVtC5Uc4+boMfarsILkI7YO/bJFUzqBknKDMYA2c0miXVTlCzSwwXoV2g+52SBt617BYF3g26NyO0B1TMEcVFCA4S96AWsHyvOPA+ENCCWsHy/eLAZSCgFYWA5QfEgeEZOQSFQsWWNnFgKziHhKKwAe5bCC2ACGEoHCrmXhCVAi6O4cgAFbeLBHdABAMCsy0dIsFgnGFDYJ8b+KbGMPgVkeCDOsDLRIIP6QDbdObVaVIDB88IDhH2iAPng4Ct8HDCzLlt/1IOAgwIPkh7VRy4AAQkITgOfE0cGF4WGwkbtlxx4E4QsBptB8ubhJ1+u5pAwHZ0GCzHR0SBp8L+D6MuWHFUFPgo7L+LMMxwt6C2juiG/UtJVngg42NiwMdg71J4C+USZUmu4YZKYk2GvcuZxWZYhSeIAJMOk44jUspHSvoU8XOL6gjO5cTPItK5+Ov8YEKXxkZ3lpewMcf4DV5uAslzg1vdSlLbq/m4bxIPM0649dEkNT7Zw8PtOUl07LkSVEImnwqc29JNdPsoIU1sa+ks8niAm5m2t+rJXk94Kp2mXSHqOBMIdx7t1OZxShFRr0A07RusF3vgbD3NY/zjim8rSsNSzzWb1BGg5R09iYn08nebMFXe81b2Rgm97m96+rzPziYrah5TxNuWff4g9iPKbYpipF+Qfy99f7MmYvkgfmi2kwbND5r1IcsZaILCxqqINXfMl4ZgC3KVQkbLaz8CV62UjzsnMzBlSVKlKpUxaPJFqeCT9kvtkFnvRfh1FzPfhFId/6CaPIXK3oVQ4eWWT4HjKnyF1NCtjNyrPi2myjrZr7nLrmvN0ojhQRvjMX+Lr+ESpbZOGuKuhlN9GrN+ct9KZOKWauw2qj7SZ1KYVlziHOlj1n2DDM5guQBm3Kg1rFLVuI7Q5rUo85Da7iZtOJUygD8H7KxfKGu4Yz3Xl2fUF7uqaOAL/rm5YNZ/jGrd/koq6cKVEbcUc1j4bRr4jl+ufQtseUVZqVLuqWelMHRQasfX0u/LlZt66LPmbb9g4licoazliXsONOxdhO4Olo77vrlFP3pz+OPOJJq6lKeqjQ9DgPUGvBiVG7LuSivJDCr4Wz/cPMq1wejvFBU9J3w3KhD6vrM0Av3QtYIKdtK5lx0042plB5uGdAkd7JkNiXJPeZHslq4rrKdp3Jw7/sz7leSr23SAaZ0rp9+/fYHq8lzJ3B+9qkvUkJMCzjnH8uT9Ptf2km7uOF710899tWbsDAzM8r6yHCFuPSoCAtvvsX6tnvsEF45AwPd1bMGifxEHHq7rvxOuPlHgX116uJL81isC3MvUndXyeyw/OHaUfq60KA6184HtfwR6bhYdygMOdbByAPnzr0DBnatYGbCklynj5b9ZwVll/Pm5mgfeXHo+reIlb596ICQtiNA/fQ+7mZ/0ea67kvHfa2xemcR5rNZmMfmZgxwNW23ts++yefwPomnO+rxBr6IAAAAASUVORK5CYII=" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Ifeoluwa King</h4>
+							<p>Software developer</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/19.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Seun lanlege</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://github.com/Superdao-DAO">
+								<div class="avater">
+									<img src="images/member/20.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="73" height="73" viewBox="0 0 120 120">
+										  <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB1CAMAAACyJNU+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACo1BMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AAACHxFhEAAAA33RSTlMAGkhsjq7G2ez4CkN+ue0ecB8WcchyqvqrBFzRYNxL19gmtycFeirQAWv3DCXV1jxW+WH9YmnvzNLwHF+n9k0rDmrue6TJpXxmUt1TaDIH4LWNWD4gFxAIM8K0djl1s8PhAuPaysAGXUTnrP4NrT+D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" y="1" width="120" height="117"/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Samuel Omidiora</h4>
+							<p>Software Engineer | Solidity Expert</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/justcharlz" >
+								<div class="avater">
+									<img src="images/member/21.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Charles Okarformbah</h4>
+							<p>Marketing Specialist | Solidity</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/olawunmi-george-aat-aca-2345b122/" >
+								<div class="avater">
+									<img src="images/member/22.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Olawunmi George</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://linkedin.com/in/precioustosin" >
+								<div class="avater">
+									<img src="images/member/23.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Tosin Akinbobola</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/emmanuel-nwamaife-39889328" >
+								<div class="avater">
+									<img src="images/member/24.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Emmanuel Nwamaife</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="http://www.linkedin.com/in/michael-aigboeghian-a16205136" >
+								<div class="avater">
+									<img src="images/member/25.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Michael edobor</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+					<div class="col-sm-3">
+						<div class="singleMember text-center">
+							<a target="_blank" href="https://www.linkedin.com/in/promise-tochi-059b16a4/" >
+								<div class="avater">
+									<img src="images/member/26.jpg" alt="Member Image">
+								</div><!-- end of avater -->
+								<div class="overlay">
+									<span class="twitterBird">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="75px" height="61px" viewBox="0 0 512 512">
+											<path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M186.4 142.4c0 19-15.3 34.5-34.2 34.5 -18.9 0-34.2-15.4-34.2-34.5 0-19 15.3-34.5 34.2-34.5C171.1 107.9 186.4 123.4 186.4 142.4zM181.4 201.3h-57.8V388.1h57.8V201.3zM273.8 201.3h-55.4V388.1h55.4c0 0 0-69.3 0-98 0-26.3 12.1-41.9 35.2-41.9 21.3 0 31.5 15 31.5 41.9 0 26.9 0 98 0 98h57.5c0 0 0-68.2 0-118.3 0-50-28.3-74.2-68-74.2 -39.6 0-56.3 30.9-56.3 30.9v-25.2H273.8z"
+											/>
+										</svg>
+									</span>
+									<div class="border-1"></div>
+									<div class="border-2"></div>
+									<div class="border-3"></div>
+								</div><!-- end of overlay -->
+							</a>
+							<h4>Promise Udenkwor</h4>
+							<p>Solidity Dev</p>
+						</div><!-- end of singleMember -->
+					</div><!-- end of col3 -->
+
+				</div><!-- end of row -->
+
+			</div><!-- end of container -->
+		</section><!-- end of ourTeam -->
+
+	</div><!-- end of allWrapper -->
+
+	<div class="footer"><!-- Footer Wrapper -->
+  <div id="footer-social" class="buttom left">
+    <a href="https://twitter.com/SuperDAOHQ" title="twitter" target="_blank"><i
+      class="ion-social-twitter"></i></a>
+    <a href="https://www.facebook.com/SuperDAOHQ" title="twitter" target="_blank"><i
+      class="ion-social-facebook"></i></a>
+    <a href="https://blog.superdao.io/" title="blog" target="_blank"><i
+      class="ion-social-rss"></i></a>
+    <a href="https://www.reddit.com/r/SuperDao/" title="blog" target="_blank"><i
+      class="ion-social-reddit"></i></a>
+    <a href="https://github.com/superDao-dao" title="github" target="_blank"><i
+      class="ion-social-github"></i></a>
+    <a href="https://www.youtube.com/channel/UCYtAwj5PohhqPsJJ1KouBew" title="youtube"
+       target="_blank"><i
+      class="ion-social-youtube"></i></a>
+  </div>
+  <div class="footer2">
+    <div class="marquee">
+      <img src="images/footer/SuperdaoLogo.png" height="20px" width="15px" alt=""> &nbsp;SUPERNEUM
+      &nbsp;Market
+      Cap: &nbsp; $
+      <strong id="mkt_cap" style="color:green"> ...</strong>&nbsp; <strong
+      style="color: blue">|</strong> &nbsp;Total
+      Tokens: &nbsp; <strong style="color: green;">100,000,000.00</strong> &nbsp;<strong
+      style="color: blue">|</strong> &nbsp; Price:
+      &nbsp; $ <strong style="color: green;" class="usd_sup"> 0.05134000</strong> &nbsp;
+      <strong
+        style="color: blue">|</strong> &nbsp; SUP : &nbsp; <strong style="color: green;"
+                                                                   class="sup_eth">0.05134000</strong>&nbsp;
+      ETH &nbsp;<strong style="color: blue"> |</strong> &nbsp; SUPERNEUM PRICE: &nbsp; <strong
+      style="color: green;" class="btc_sup">0.000551 </strong>&nbsp;BTC/SUP &nbsp;
+      <strong style="color: blue">|</strong> &nbsp; DAPPS: &nbsp; <img
+      src="images/footer/pokereum-icon.png"
+      height="22px" width="20px"> POKEREUM &nbsp;<img
+      src="images/footer/dappserysymbolmedium.png" height="20px" width="20px">&nbsp;DAPPSERY
+      &nbsp; <strong style="color: blue">|</strong>&nbsp;
+      <img src="images/footer/eth-logo.png" height="20px" width="25px" alt=""> ETH: &nbsp;
+      <strong style="color: green;" class="btc_eth"> 0.00013000</strong> BTC &nbsp; <strong
+      style="color: blue">|</strong>&nbsp;&nbsp; © 2016 SuperDAO. &nbsp;All rights reserved
+      &nbsp; <strong
+      style="color: blue">|</strong>
+    </div>
+  </div>
+  <!--<a href="http://crowdfunding.superdao.io">
+    <button class="buttom right">
+      Crowdfunding: Enter Here...
+    </button>
+  </a>-->
+</div><!-- end of FooterWrapper -->
+
+
+	<!-- SCRIPTS ========================================== -->
+
+	<script type="text/javascript" src="js/lib/web3.min.js"></script>
+	<script type="text/javascript" src="js/lib/vendor.min.js"></script>
+	<script type="text/javascript" src="js/lib/chartist.min.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.marquee.min.js"></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+	<script type="text/javascript" src="js/lib/ethers-js.js"></script>
+	<script type="text/javascript" src="js/lib/scripts.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/prices.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+
+
+</body>
+
+</html>
